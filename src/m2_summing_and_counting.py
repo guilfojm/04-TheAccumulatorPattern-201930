@@ -8,9 +8,10 @@ in another classic form:
    IN GRAPHICS:   x = x + pixels
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher, Mark Hays,
-         Aaron Wilkin, their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         Aaron Wilkin, their colleagues, and Justin Guilfoyle.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
+import math
 
 # -----------------------------------------------------------------------------
 # Students: As you work each of these problems, ask yourself:
@@ -32,7 +33,7 @@ def main():
 def run_test_sum_more_cosines():
     """ Tests the   sum_more_cosines   function. """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  sum_more_cosines  function defined below.
     #   Include at least **   3   ** tests (we wrote one for you).
     #
@@ -66,11 +67,28 @@ def run_test_sum_more_cosines():
     else:
         print('       actual:  ', answer)
 
+
+
     # -------------------------------------------------------------------------
-    # TODO: 2 (continued).
+    # DONE: 2 (continued).
     # Below this comment, add 2 more test cases of your own choosing.
     # -------------------------------------------------------------------------
 
+    expected = 2.08060  # This is APPROXIMATELY the correct answer.
+    answer = sum_more_cosines(-1, 1)
+    print('Test 2 expected:', expected, '(approximately)')
+    if answer is not None:
+        print('       actual:  ', round(answer, 5))
+    else:
+        print('       actual:  ', answer)
+
+    expected = -0.23582  # This is APPROXIMATELY the correct answer.
+    answer = sum_more_cosines(0, 5)
+    print('Test 1 expected:', expected, '(approximately)')
+    if answer is not None:
+        print('       actual:  ', round(answer, 5))
+    else:
+        print('       actual:  ', answer)
 
 def sum_more_cosines(m, n):
     """
@@ -99,6 +117,13 @@ def sum_more_cosines(m, n):
     #   Reason: To ensure that you get more practice using expressions.
     # -------------------------------------------------------------------------
 
+    total = 0
+    x = (n - m) + 1
+    for k in range(x):
+        total = total + math.cos(k)
+    return total
+
+
 
 def run_test_count_sines_from():
     """ Tests the   count_sines_from   function. """
@@ -126,6 +151,30 @@ def run_test_count_sines_from():
     # Below this comment, add 5 more test cases of your own choosing.
     # -------------------------------------------------------------------------
 
+    expected = 3
+    answer = count_sines_from(4, 6)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 0
+    answer = count_sines_from(7, 7)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 1
+    answer = count_sines_from(9, 9)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 3
+    answer = count_sines_from(3, 5)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 1
+    answer = count_sines_from(7, 9)
+    print('Test 6 expected:', expected)
+    print('       actual:  ', answer)
 
 def count_sines_from(m, n):
     """
@@ -155,6 +204,16 @@ def count_sines_from(m, n):
     #   of the RANGE expression, if you happen to know them.
     # -------------------------------------------------------------------------
 
+    x = (n - m) + 1
+    count = 0
+    for k in range(x):
+        y = math.sin(k)
+        if y > .5:
+            count = count + 1
+        else:
+            count = count
+    return count
+
 
 def run_test_count_sines_vs_cosines():
     """ Tests the   count_sines_vs_cosines   function. """
@@ -181,7 +240,30 @@ def run_test_count_sines_vs_cosines():
     # TODO: 6 (continued).
     # Below this comment, add 5 more test cases of your own choosing.
     # -------------------------------------------------------------------------
+    expected =
+    answer = count_sines_vs_cosines()
+    print('Test  expected:', expected)
+    print('       actual:  ', answer)
 
+    expected =
+    answer = count_sines_vs_cosines()
+    print('Test  expected:', expected)
+    print('       actual:  ', answer)
+
+    expected =
+    answer = count_sines_vs_cosines()
+    print('Test  expected:', expected)
+    print('       actual:  ', answer)
+
+    expected =
+    answer = count_sines_vs_cosines()
+    print('Test  expected:', expected)
+    print('       actual:  ', answer)
+
+    expected =
+    answer = count_sines_vs_cosines()
+    print('Test  expected:', expected)
+    print('       actual:  ', answer)
 
 def count_sines_vs_cosines(m):
     """
