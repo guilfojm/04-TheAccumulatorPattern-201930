@@ -115,13 +115,12 @@ def draw_parallel_lines(n, point, length, window):
 
     x = point.x
     y = point.y
-    start = rg.Point(x, y)
-    end = start.x + length
     for _ in range(n):
+        start = rg.Point(x, y)
+        end = rg.Point(start.x + length, start.y)
         line = rg.Line(start, end)
         line.attach_to(window)
-        start = start.y - 30
-
+        y = y - 30
     window.render()
     window.close_on_mouse_click()
 
