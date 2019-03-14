@@ -28,8 +28,8 @@ import math
 def main():
     """ Calls the   TEST   functions in this module. """
     #run_test_draw_squares_from_circle()
-    run_test_draw_circles_from_rectangle()
-    #run_test_draw_lines_from_rectangles()
+    #run_test_draw_circles_from_rectangle()
+    run_test_draw_lines_from_rectangles()
 
 
 def run_test_draw_squares_from_circle():
@@ -216,28 +216,50 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
     ###########################################################################
     # -------------------------------------------------------------------------
     rectangle.attach_to(window)
-    radius = abs((rectangle.corner_2.y - rectangle.corner_1.y) / 2)
+
     if rectangle.corner_1.x > rectangle.corner_2.x:
         for k in range(m):
+            radius = abs((rectangle.corner_2.y - rectangle.corner_1.y) / 2)
             if rectangle.corner_1.y > rectangle.corner_2.y:
-                circle = rg.Circle(rg.Point(-1 * (k * 2 + 1) * radius + rectangle.corner_2.x, rectangle.corner_2.y + radius), radius)
+                circle = rg.Circle(rg.Point(-1*(k*2+1)*radius+rectangle.corner_2.x,rectangle.corner_2.y+radius),radius)
                 circle.fill_color = rectangle.fill_color()
                 circle.attach_to(window)
             else:
-                circle = rg.Circle(rg.Point(-1 * (k * 2 +1) * radius + rectangle.corner_2.x, rectangle.corner_1.y + radius), radius)
+                circle = rg.Circle(rg.Point(-1*(k*2+1)*radius+rectangle.corner_2.x,rectangle.corner_1.y+radius),radius)
+            circle.fill_color = rectangle.fill_color
+            circle.attach_to(window)
+    else:
+        for k in range(m):
+            radius = abs((rectangle.corner_1.y - rectangle.corner_2.y)/2)
+            if rectangle.corner_1.y > rectangle.corner_2.y:
+                circle = rg.Circle(rg.Point(-1*(k*2+1)*radius+rectangle.corner_1.x,rectangle.corner_2.y+radius),radius)
                 circle.fill_color = rectangle.fill_color
                 circle.attach_to(window)
+            else:
+                circle = rg.Circle(rg.Point(-1*(k*2+1)*radius+rectangle.corner_1.x,rectangle.corner_1.y+radius),radius)
+            circle.fill_color = rectangle.fill_color
+            circle.attach_to(window)
+    radius = abs((rectangle.corner_1.x - rectangle.corner_2.x)/2)
     if rectangle.corner_1.y > rectangle.corner_2.y:
         for k in range(n):
             if rectangle.corner_1.x > rectangle.corner_2.x:
-                circle = rg.Circle(rg.Point(rectangle.corner_2.x + radius, -1 * (k * 2 + 1) * radius + rectangle.corner_2.y), radius)
+                circle = rg.Circle(rg.Point(rectangle.corner_2.x+radius,-1*(k*2+1)*radius+rectangle.corner_2.y),radius)
                 circle.outline_color = rectangle.outline_color
                 circle.attach_to(window)
             else:
-                circle = rg.Circle(rg.Point(rectangle.corner_1.x + radius, -1 * (k * 2 + 1) * radius + rectangle.corner_1.y), radius)
+                circle = rg.Circle(rg.Point(rectangle.corner_1.x+radius,-1*(k*2+1)*radius+rectangle.corner_1.y), radius)
                 circle.outline_color = rectangle.outline_color
                 circle.attach_to(window)
-
+    else:
+        for k in range(n):
+            if rectangle.corner_1.x > rectangle.corner_2.x:
+                circle = rg.Circle(rg.Point(rectangle.corner_2.x+radius, -1*(k*2+1)*radius+rectangle.corner_1.y), radius)
+                circle.outline_color = rectangle.outline_color
+                circle.attach_to(window)
+            else:
+                circle = rg.Circle(rg.Point(rectangle.corner_1.x+radius, -1*(k*2+1)*radius+rectangle.corner_1.y), radius)
+                circle.outline_color = rectangle.outline_color
+                circle.attach_to(window)
 
     window.render()
 
@@ -332,7 +354,22 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     ###########################################################################
     # -------------------------------------------------------------------------
 
-
+    r1 = rectangle1
+    r2 = rectangle2
+    r1.attach_to(window)
+    r2.attach_to(window)
+    c1 = rg.Point((r1.corner_1.x + r1.corner_2.x) / 2, (r1.corner_1.y + r1.corner_2.y) / 2)
+    c2 = rg.Point((r2.corner_1.x + r2.corner_2.x) / 2, (r2.corner_1.y + r2.corner_2.y) / 2)
+    for k in range(n):
+        point1 = rg.Point(c1.x - k*abs(r1.corner_1.x - r1.corner_2.x) / 2, c1.y + k*abs(r1.corner_1.y-r1.corner_2.y)/2)
+        point2 = rg.Point(c2.x - k * abs(r1.corner_1.x - r1.corner_2.x) / 2,c2.y + k * abs(r1.corner_1.y - r1.corner_2.y) / 2)
+        line = rg.Line(point1, point2)
+        if k % 2 == 0:
+            line.color = r1.outline_color
+        else:
+            line.color = r2.outline_color
+        line.attach_to(window)
+    window.render()
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
